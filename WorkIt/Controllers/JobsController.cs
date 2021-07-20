@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using WorkIt.Models;
 using WorkIt.Services;
 
 namespace WorkIt.Controllers
@@ -12,6 +14,18 @@ namespace WorkIt.Controllers
     public JobsController(JobsService js)
     {
       _js = js;
+    }
+    [HttpGet]
+    public ActionResult<List<Job>> GetAllJobs()
+    {
+      try
+      {
+        return Ok(_js.GetAllJobs());
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
     }
   }
 }
