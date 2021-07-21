@@ -19,5 +19,12 @@ namespace WorkIt.Services
     {
       return _jr.GetAllJobs();
     }
+
+    public object CreateJob(Job jobData)
+    {
+      var job = _jr.CreateJob(jobData);
+      _cr.CreateContractor(job.CreatorId, job.Id);
+      return job;
+    }
   }
 }
